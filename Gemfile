@@ -3,5 +3,5 @@
 source "https://rubygems.org"
 
 gem 'sinatra'
-gem 'puma'
 gem 'mongo'
+ruby '2.7.0'
