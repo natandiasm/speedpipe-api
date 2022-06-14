@@ -18,6 +18,7 @@ post '/log/:uuid' do
         # db = Mongo_connection.mongo.db('speedpipe')
         collection = Mongo_connection.mongo['logs']
         collection.insert_one(hash_log)
+        {sucess:'doc add'}.to_json
     rescue => exception
         {erro: exception}.to_json
     end
