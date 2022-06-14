@@ -17,7 +17,7 @@ post '/log/:uuid' do
         hash_log.to_json
         # db = Mongo_connection.mongo.db('speedpipe')
         collection = Mongo_connection.mongo['logs']
-        collection.insert(hash_log)
+        collection.insert_one(hash_log)
     rescue => exception
         {erro: exception}.to_json
     end
