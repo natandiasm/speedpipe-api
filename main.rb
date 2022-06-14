@@ -12,7 +12,7 @@ end
 
 post '/log/:uuid' do
 begin
-    hash_log = JSON.parse(request.body.read).symbolize_keys
+    hash_log = JSON.parse(request.body.read)
 rescue => exception
     return "#{exception}"
 end
