@@ -1,7 +1,7 @@
 module Mongo_connection
-    @con = Mongo::Client.new([""], :database => "", user: "#{ENV[""]}", password: "#{ENV[""]}", auth_source: "#{ENV[""]}", auth_mech: :scram)
+    @mongo = Mongo::Connection.from_uri(ENV['MONGO_URL'])
 
-    def self.con
-        @con
+    def self.mongo
+        @mongo
     end
 end
