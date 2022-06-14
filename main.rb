@@ -4,6 +4,7 @@ require 'mongo'
 
 require_relative 'modules/mongo_connection'
 
+Mongo_connection.init
 
 get '/' do
     content_type :json

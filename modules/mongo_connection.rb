@@ -1,7 +1,13 @@
 module Mongo_connection
     @uri = Mongo::URI.new(ENV['MONGO_URL'])
-    @client = Mongo::Client.new(@uri.servers, @uri.options, @uri.credentials, @uri.database)
-    def self.cli
+    @client = Mongo::Client.new(@uri.servers, @uri.options, @uri.credentials)
+
+    def self.init
+        @client.login(@uri.credentials)
+        @client[@uri.database]
+    end
+
+    def self.client
         @client
     end
 end
