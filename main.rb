@@ -50,6 +50,6 @@ get '/log/:uuid' do
         doc_mongo.delete!('_id')
         doc_mongo.to_h.to_json
     rescue => exception
-        {error: exception}.to_json
+        {mgs: 'Id not found'}.to_json
     end
 end
