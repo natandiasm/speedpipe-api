@@ -8,7 +8,8 @@ get '/' do
 end
 
 get '/verify_mongo' do
-    "env is #{ENV['MONGO_URL']}"
+    content_type :json
+    { mongo: ENV['MONGO_URL'] }.to_json
 end
 
 # Obtem as informações do log
