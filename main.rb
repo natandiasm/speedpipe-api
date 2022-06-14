@@ -8,7 +8,7 @@ get '/' do
 end
 
 get '/verify_mongo' do
-    ENV['MONGO_URL']
+    "env is #{ENV['MONGO_URL']}"
 end
 
 # Obtem as informações do log
