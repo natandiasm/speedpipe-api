@@ -38,15 +38,19 @@ patch '/log/:uuid' do
         collection.update_one({"_id" => doc_mongo["_id"]}, {"$set" => update_doc})
         {sucess:'doc updade'}.to_json
     rescue => exception
-        {erro: exception}.to_json
+        {error: exception}.to_json
     end
 end
 
 # Obtem as informações do log
 get '/log/:uuid' do
     content_type :json
-    collection = Mongo_connection.client['logs']
-    doc_mongo = collection.find({uuid: params['uuid']})
-    doc_mongo.delete!('_id')
-    doc_mongo.to_h.to_json
+    begin
+        collection = Mongo_connection.client['logs']
+        doc_mongo = collection.find({uuid: params['uuid']}).to_a.first
+        doc_mongo.delete!('_id')
+        doc_mongo.to_h.to_json
+    rescue => exception
+        {error: exception}.to_json
+    end
 end
