@@ -14,7 +14,7 @@ post '/log/:uuid' do
 begin
     hash_log = JSON.parse(request.body.read).symbolize_keys
 rescue => exception
-    exception
+    return "#{exception}"
 end
     # db = Mongo_connection.mongo.db('speedpipe')
     # collection = db.collection('logs')
