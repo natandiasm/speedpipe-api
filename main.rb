@@ -12,11 +12,15 @@ end
 
 post '/log/:uuid' do
     content_type :json
-    hash_log = JSON.parse(request.body.read)
-    hash_log.to_json
-    # db = Mongo_connection.mongo.db('speedpipe')
-    collection = Mongo_connection.mongo.db.collection('logs')
-    collection.insert(hash_log)
+    begin
+        hash_log = JSON.parse(request.body.read)
+        hash_log.to_json
+        # db = Mongo_connection.mongo.db('speedpipe')
+        collection = Mongo_connection.mongo.db.collection('logs')
+        collection.insert(hash_log)
+    rescue => exception
+        {erro: exception}.to_json
+    end
 end
 
 # Obtem as informações do log
