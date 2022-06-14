@@ -32,9 +32,8 @@ patch '/log/:uuid' do
         collection = Mongo_connection.client['logs']
         doc_mongo = collection.find({uuid: params['uuid']}).to_a.first
         update_doc = {}
-        update_doc['logs'] = []
+        update_doc['logs'] = doc_mongo['logs']
         update_doc['logs'] << hash_log
-        update_doc['logs'] << doc_mongo['logs']
         collection.update_one({"_id" => doc_mongo["_id"]}, {"$set" => update_doc})
         {sucess:'doc updade'}.to_json
     rescue => exception
