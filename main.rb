@@ -22,7 +22,7 @@ post '/log/:uuid' do
 
         {sucess:'doc add'}.to_json
     rescue => exception
-        {error: exception, data: res}.to_json
+        {error: exception, data: JSON.parse(request.body.read)}.to_json
     end
 end
 
