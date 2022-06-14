@@ -8,7 +8,7 @@ get '/' do
 end
 
 get '/verify_mongo' do
-    ENV['DOKKU_MONGO_SPEEDPIPE_API_POR']
+    ENV['MONGO_URL']
 end
 
 # Obtem as informações do log
