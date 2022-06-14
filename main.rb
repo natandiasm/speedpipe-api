@@ -35,7 +35,7 @@ patch '/log/:uuid' do
         update_doc['logs'] = doc_mongo['logs']
         update_doc['logs'] << hash_log
         collection.update_one({"_id" => doc_mongo["_id"]}, {"$set" => update_doc})
-        {sucess:'doc updade'}.to_json
+        {sucess:update_doc['logs']}.to_json
     rescue => exception
         {error: exception}.to_json
     end
