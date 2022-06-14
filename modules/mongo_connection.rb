@@ -1,6 +1,5 @@
 module Mongo_connection
-    @mongo = Mongo::Connection.from_uri(ENV['MONGO_URL'])
-
+    @mongo = Mongo::Client.new([ENV['MONGO_URL']], :database => 'speedpipe')
     def self.mongo
         @mongo
     end
