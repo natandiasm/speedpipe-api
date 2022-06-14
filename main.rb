@@ -21,7 +21,7 @@ post '/log/:uuid' do
 
         {sucess:'doc add'}.to_json
     rescue => exception
-        {erro: exception}.to_json
+        {error: exception}.to_json
     end
 end
 
@@ -30,7 +30,7 @@ patch '/log/:uuid' do
     begin
         hash_log = JSON.parse(request.body.read)
         collection = Mongo_connection.client['logs']
-        doc_mongo = collection.find({uuid: params['uuid']})
+        doc_mongo = collection.find({uuid: params['uuid']}).to_a.first
         update_doc = {}
         update_doc['logs'] = []
         update_doc['logs'] << hash_log
