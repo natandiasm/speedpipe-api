@@ -12,16 +12,17 @@ end
 post '/log/:uuid' do
     content_type :json
     begin
+        res = JSON.parse(request.body.read)
         doc_mongo = {}
         doc_mongo['uuid'] = params['uuid']
         doc_mongo['logs'] = []
-        doc_mongo['logs'] << JSON.parse(request.body.read)
+        doc_mongo['logs'] << res
         collection = Mongo_connection.client['logs']
         collection.insert_one(doc_mongo)
 
         {sucess:'doc add'}.to_json
     rescue => exception
-        {error: exception}.to_json
+        {error: exception, data: res}.to_json
     end
 end
 
