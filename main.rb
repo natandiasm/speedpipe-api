@@ -11,11 +11,10 @@ get '/' do
 end
 
 post '/log/:uuid' do
-begin
+
+    content_type :json
     hash_log = JSON.parse(request.body.read)
-rescue => exception
-    return "#{exception}"
-end
+    hash_log.to_json
     # db = Mongo_connection.mongo.db('speedpipe')
     # collection = db.collection('logs')
     # collection.insert(hash_log)
