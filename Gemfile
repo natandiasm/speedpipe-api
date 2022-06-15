@@ -4,4 +4,4 @@ source "https://rubygems.org"
 
 gem 'sinatra'
 gem 'mongo'
-gem 'sinatra-cross_origin'
+gem 'sinatra-cors', '~> 1.2'

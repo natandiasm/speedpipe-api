@@ -1,16 +1,15 @@
 require 'sinatra'
+require "sinatra/cors"
 require 'json'
 require 'mongo'
 
 require_relative 'modules/mongo_connection'
 
-configure do
-    enable :cross_origin
-  end
 
-before do
-    response.headers['Access-Control-Allow-Origin'] = '*'
-end
+set :allow_origin, "*"
+set :allow_methods, "GET,PATCH,POST"
+set :allow_headers, "content-type,if-modified-since"
+set :expose_headers, "location,link"
 
 get '/' do
     content_type :json
