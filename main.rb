@@ -15,7 +15,7 @@ post '/log/:uuid' do
         res = JSON.parse(request.body.read)
         doc_mongo = {}
         doc_mongo['uuid'] = params['uuid']
-        doc_mongo['data'] = Time.now
+        doc_mongo['date'] = Time.now
         doc_mongo['logs'] = []
         doc_mongo['logs'] << res
         collection = Mongo_connection.client['logs']
@@ -31,6 +31,7 @@ patch '/log/:uuid' do
     content_type :json
     begin
         hash_log = JSON.parse(request.body.read)
+        hash_log['date'] = Time.now
         collection = Mongo_connection.client['logs']
         doc_mongo = collection.find({uuid: params['uuid']}).to_a.first
         update_doc = {}
@@ -49,8 +50,8 @@ get '/log/:uuid' do
     begin
         collection = Mongo_connection.client['logs']
         doc_mongo = collection.find({"uuid" => params['uuid'].to_s}).to_a.first
-        #doc_mongo.delete!('_id')
         doc_mongo.to_h.to_json
+        {'logs': doc_mongo['logs']}
     rescue => exception
         {mgs: 'Id not found', data: params['uuid'].to_s}.to_json
     end
