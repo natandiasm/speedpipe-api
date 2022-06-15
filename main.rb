@@ -13,6 +13,7 @@ post '/log/:uuid' do
     content_type :json
     begin
         res = JSON.parse(request.body.read)
+        puts res
         doc_mongo = {}
         doc_mongo['uuid'] = params['uuid']
         doc_mongo['logs'] = []
@@ -22,7 +23,7 @@ post '/log/:uuid' do
 
         {sucess:'doc add'}.to_json
     rescue => exception
-        {error: exception, data: request.body.read.to_s}.to_json
+        {error: exception, data: request.body.read}.to_json
     end
 end
 
