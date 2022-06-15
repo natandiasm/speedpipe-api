@@ -4,6 +4,14 @@ require 'mongo'
 
 require_relative 'modules/mongo_connection'
 
+configure do
+    enable :cross_origin
+  end
+
+before do
+    response.headers['Access-Control-Allow-Origin'] = '*'
+end
+
 get '/' do
     content_type :json
     { version: 0.1 }.to_json
