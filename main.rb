@@ -23,6 +23,7 @@ post '/log/:uuid' do
         doc_mongo = {}
         doc_mongo['uuid'] = params['uuid']
         doc_mongo['date'] = Time.now
+        doc_mongo['status'] = 'running'
         doc_mongo['logs'] = []
         doc_mongo['logs'] << res
         collection = Mongo_connection.client['logs']
@@ -44,6 +45,9 @@ patch '/log/:uuid' do
         update_doc = {}
         update_doc['logs'] = doc_mongo['logs']
         update_doc['logs'] << hash_log
+        if hash_log['step'] == 'end'
+            update_doc['status'] == hash_log['text']
+        end
         collection.update_one({"_id" => doc_mongo["_id"]}, {"$set" => update_doc})
         {sucess: 'doc update' }.to_json
     rescue => exception
