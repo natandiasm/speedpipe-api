@@ -62,7 +62,7 @@ get '/log/:uuid' do
         collection = Mongo_connection.client['logs']
         doc_mongo = collection.find({"uuid" => params['uuid'].to_s}).to_a.first
         doc_mongo = doc_mongo.to_h
-        {status: doc_mongo['logs'], logs: doc_mongo['logs']}.to_json
+        {status: doc_mongo['status'], logs: doc_mongo['logs']}.to_json
     rescue => exception
         {mgs: 'Id not found', data: params['uuid'].to_s}.to_json
     end
