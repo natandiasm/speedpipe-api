@@ -46,7 +46,7 @@ patch '/log/:uuid' do
         update_doc['logs'] = doc_mongo['logs']
         update_doc['logs'] << hash_log
         if hash_log['step'] == 'end'
-            update_doc['status'] == hash_log['text']
+            update_doc['status'] = hash_log['text']
         end
         collection.update_one({"_id" => doc_mongo["_id"]}, {"$set" => update_doc})
         {sucess: 'doc update' }.to_json
