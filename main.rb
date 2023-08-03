@@ -1,7 +1,9 @@
+require 'dotenv/load'
 require 'sinatra'
 require "sinatra/cors"
 require 'json'
 require 'mongo'
+
 
 require_relative 'modules/mongo_connection'
 
